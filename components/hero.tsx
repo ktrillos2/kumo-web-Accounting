@@ -35,7 +35,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted/20 to-background"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted/20 to-background pt-24 sm:pt-28 lg:pt-24 pb-20 scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
     >
       <div className="absolute inset-0 overflow-hidden">
         {/* Animated gradient waves */}
@@ -135,7 +135,7 @@ export default function Hero() {
               <Button
                 size="lg"
                 onClick={() => scrollToSection("contact")}
-                className="bg-accent text-accent-foreground hover:bg-accent/90 hover-lift group px-8 py-4 text-lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 hover-lift group px-8 py-4 text-lg cursor-pointer"
               >
                 Consulta Gratuita
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -144,7 +144,7 @@ export default function Hero() {
                 size="lg"
                 variant="outline"
                 onClick={() => scrollToSection("services")}
-                className="border-accent text-accent hover:bg-accent hover:text-accent-foreground hover-lift px-8 py-4 text-lg"
+                className="border-accent text-accent hover:bg-accent hover:text-white hover-lift px-8 py-4 text-lg cursor-pointer"
               >
                 Ver Servicios
               </Button>
