@@ -60,11 +60,13 @@ export default function Alliances() {
         <div className="text-center mb-16">
           <h2
             className={`text-4xl font-bold font-serif text-foreground mb-6 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Nuestras <span className="text-accent">Alianzas</span>
           </h2>
           <p
             className={`text-xl text-muted-foreground max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up animate-delay-100" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Trabajamos con socios estratégicos para ofrecer servicios especializados y ampliar nuestro alcance
             profesional.
@@ -76,6 +78,7 @@ export default function Alliances() {
             <Card
               key={alliance.title}
               className={`hover-lift ${isVisible ? `animate-slide-in-${index % 2 === 0 ? "left" : "right"} animate-delay-200` : "opacity-0"}`}
+              style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
             >
               <CardContent className="p-8">
                 <div className="flex items-start gap-6">
@@ -107,7 +110,10 @@ export default function Alliances() {
         </div>
 
         {/* Partnership Values */}
-        <div className={`bg-card rounded-2xl p-8 ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
+        <div
+          className={`bg-card rounded-2xl p-8 ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}
+          style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+        >
           <div className="text-center mb-8">
             <Handshake className="w-16 h-16 text-accent mx-auto mb-4" />
             <h3 className="text-3xl font-bold text-foreground mb-4">

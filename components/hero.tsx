@@ -119,7 +119,10 @@ export default function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-12">
           {/* Main Content */}
-          <div className={`space-y-8 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+          <div
+            className={`space-y-8 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+          >
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-foreground leading-tight max-w-5xl mx-auto">
                 <span className="block">Servicios</span>
@@ -153,6 +156,7 @@ export default function Hero() {
 
           <div
             className={`grid grid-cols-1 sm:grid-cols-3 gap-8 pt-16 max-w-4xl mx-auto ${isVisible ? "animate-fade-in-up animate-delay-300" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             <div className="text-center space-y-2">
               <div className="text-4xl md:text-5xl font-bold text-accent">15+</div>
@@ -168,7 +172,10 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className={`pt-16 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}>
+          <div
+            className={`pt-16 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+          >
             <div className="flex flex-col items-center space-y-2">
               <span className="text-sm text-muted-foreground">Descubre más</span>
               <div className="w-6 h-10 border-2 border-accent rounded-full flex justify-center">

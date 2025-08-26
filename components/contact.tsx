@@ -64,17 +64,22 @@ export default function Contact() {
     <section ref={sectionRef} id="contact" className="py-20 bg-gradient-to-br from-background to-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className={`inline-flex items-center gap-2 mb-4 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+          <div
+            className={`inline-flex items-center gap-2 mb-4 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+          >
             <MessageSquare className="w-8 h-8 text-accent" />
             <span className="text-accent font-semibold text-lg">Contáctanos</span>
           </div>
           <h2
             className={`text-5xl font-bold font-serif text-foreground mb-6 ${isVisible ? "animate-fade-in-up animate-delay-100" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Hablemos de tu <span className="text-accent">Futuro Financiero</span>
           </h2>
           <p
             className={`text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed ${isVisible ? "animate-fade-in-up animate-delay-200" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Nuestro equipo de expertos está listo para transformar la gestión contable y tributaria de tu empresa
           </p>
@@ -82,7 +87,10 @@ export default function Contact() {
 
         <div className="space-y-12">
           {/* Main Contact Form - Centered and prominent */}
-          <div className={`max-w-4xl mx-auto ${isVisible ? "animate-scale-in animate-delay-300" : "opacity-0"}`}>
+          <div
+            className={`max-w-4xl mx-auto ${isVisible ? "animate-scale-in animate-delay-300" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+          >
             <Card className="hover-lift shadow-2xl border-0 bg-background/80 backdrop-blur-sm">
               <CardHeader className="text-center pb-6">
                 <CardTitle className="text-3xl font-bold text-foreground">
@@ -202,6 +210,7 @@ export default function Contact() {
           {/* Contact Information Cards - Below form in grid */}
           <div
             className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             <Card className="hover-lift text-center group">
               <CardContent className="p-6">
@@ -263,7 +272,10 @@ export default function Contact() {
           </div>
 
           {/* Call to Action */}
-          <div className={`text-center ${isVisible ? "animate-fade-in-up animate-delay-700" : "opacity-0"}`}>
+          <div
+            className={`text-center ${isVisible ? "animate-fade-in-up animate-delay-700" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+          >
             <Card className="max-w-2xl mx-auto bg-accent text-accent-foreground hover-lift">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-4">¿Necesitas Atención Inmediata?</h3>

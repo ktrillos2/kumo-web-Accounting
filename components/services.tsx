@@ -83,11 +83,13 @@ export default function Services() {
         <div className="text-center mb-16">
           <h2
             className={`text-4xl font-bold font-serif text-foreground mb-6 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Nuestros <span className="text-accent">Servicios</span>
           </h2>
           <p
             className={`text-xl text-muted-foreground max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up animate-delay-100" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Ofrecemos una amplia gama de servicios contables y tributarios diseñados para satisfacer las necesidades
             específicas de cada cliente.
@@ -99,6 +101,7 @@ export default function Services() {
             <Card
               key={service.title}
               className={`hover-lift group cursor-pointer ${isVisible ? `animate-scale-in animate-delay-${200 + index * 100}` : "opacity-0"}`}
+              style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
             >
               <CardHeader className="text-center pb-4">
                 <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -126,6 +129,7 @@ export default function Services() {
         {/* CTA Section */}
         <div
           className={`text-center bg-muted rounded-2xl p-8 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
+          style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
         >
           <h3 className="text-3xl font-bold text-foreground mb-4">
             ¿Necesita una <span className="text-accent">Consulta Personalizada</span>?

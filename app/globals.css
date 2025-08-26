@@ -315,3 +315,17 @@ html {
 .animate-float-slow {
   animation: floatSlow 12s ease-in-out infinite;
 }
+
+/* Sutil animación de flotación para botones/elementos UI */
+@keyframes bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-bob {
+  animation: bob 2.5s ease-in-out infinite;
+}

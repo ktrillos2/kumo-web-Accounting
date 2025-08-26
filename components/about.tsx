@@ -54,11 +54,13 @@ export default function About() {
         <div className="text-center mb-16">
           <h2
             className={`text-4xl font-bold font-serif text-foreground mb-6 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Sobre <span className="text-accent">Nosotros</span>
           </h2>
           <p
             className={`text-xl text-muted-foreground max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up animate-delay-100" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Somos una firma especializada en servicios contables y tributarios con más de 15 años de experiencia,
             comprometidos con el crecimiento y éxito de nuestros clientes.
@@ -66,7 +68,10 @@ export default function About() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div className={`space-y-6 ${isVisible ? "animate-slide-in-left" : "opacity-0"}`}>
+          <div
+            className={`space-y-6 ${isVisible ? "animate-slide-in-left" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+          >
             <h3 className="text-3xl font-bold text-foreground">
               Nuestra <span className="text-accent">Historia</span>
             </h3>
@@ -90,7 +95,10 @@ export default function About() {
             </div>
           </div>
 
-          <div className={`relative ${isVisible ? "animate-slide-in-right" : "opacity-0"}`}>
+          <div
+            className={`relative ${isVisible ? "animate-slide-in-right" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+          >
             <div className="bg-card rounded-2xl p-8 shadow-xl hover-lift">
               <div className="space-y-6">
                 <h4 className="text-2xl font-bold text-foreground">Nuestra Misión</h4>
@@ -114,6 +122,7 @@ export default function About() {
         <div className="text-center mb-12">
           <h3
             className={`text-3xl font-bold text-foreground mb-6 ${isVisible ? "animate-fade-in-up animate-delay-200" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Nuestros <span className="text-accent">Valores</span>
           </h3>
@@ -124,6 +133,7 @@ export default function About() {
             <Card
               key={value.title}
               className={`hover-lift ${isVisible ? `animate-scale-in animate-delay-${300 + index * 100}` : "opacity-0"}`}
+              style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
             >
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">

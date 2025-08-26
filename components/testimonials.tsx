@@ -75,11 +75,13 @@ export default function Testimonials() {
         <div className="text-center mb-16">
           <h2
             className={`text-4xl font-bold font-serif text-foreground mb-6 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             Lo que Dicen Nuestros <span className="text-accent">Clientes</span>
           </h2>
           <p
             className={`text-xl text-muted-foreground max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up animate-delay-100" : "opacity-0"}`}
+            style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
           >
             La satisfacción de nuestros clientes es nuestro mayor logro. Conoce sus experiencias trabajando con
             nosotros.
@@ -87,7 +89,10 @@ export default function Testimonials() {
         </div>
 
         {/* Featured Testimonial */}
-        <div className={`mb-12 ${isVisible ? "animate-scale-in animate-delay-200" : "opacity-0"}`}>
+        <div
+          className={`mb-12 ${isVisible ? "animate-scale-in animate-delay-200" : "opacity-0"}`}
+          style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
+        >
           <Card className="max-w-3xl mx-auto hover-lift">
             <CardContent className="p-6 md:p-8">
               <div className="text-center">
@@ -116,9 +121,8 @@ export default function Testimonials() {
             <button
               key={index}
               onClick={() => setCurrentTestimonial(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentTestimonial ? "bg-accent scale-125" : "bg-muted-foreground/30"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentTestimonial ? "bg-accent scale-125" : "bg-muted-foreground/30"
+                }`}
             />
           ))}
         </div>
@@ -128,10 +132,10 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <Card
               key={testimonial.name}
-              className={`hover-lift cursor-pointer transition-all duration-300 ${
-                index === currentTestimonial ? "ring-2 ring-accent scale-105" : ""
-              } ${isVisible ? `animate-fade-in-up animate-delay-${300 + index * 100}` : "opacity-0"}`}
+              className={`hover-lift cursor-pointer transition-all duration-300 ${index === currentTestimonial ? "ring-2 ring-accent scale-105" : ""
+                } ${isVisible ? `animate-fade-in-up animate-delay-${300 + index * 100}` : "opacity-0"}`}
               onClick={() => setCurrentTestimonial(index)}
+              style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
             >
               <CardContent className="p-4">
                 <div className="flex justify-center mb-2">
@@ -153,6 +157,7 @@ export default function Testimonials() {
         {/* Stats Section */}
         <div
           className={`mt-16 bg-muted rounded-2xl p-8 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
+          style={{ opacity: isVisible ? 1 : 0, animationFillMode: "both", willChange: "transform, opacity" }}
         >
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
