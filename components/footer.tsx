@@ -161,16 +161,7 @@ export default function Footer() {
               © 2024 TN Accounting. Todos los derechos reservados.
             </div>
 
-            <div className="flex items-center gap-6">
-              <Button
-                onClick={scrollToTop}
-                size="sm"
-                variant="outline"
-                className="bg-black border-2 border-accent text-accent hover:bg-black/90 hover:scale-110 transition-transform duration-300 rounded-full focus:ring-2 focus:ring-accent"
-              >
-                <ArrowUp className="w-4 h-4 text-accent" />
-              </Button>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -180,9 +171,8 @@ export default function Footer() {
         aria-label="Volver arriba"
         onClick={scrollToTop}
         size="icon"
-        className={`fixed bottom-8 right-8 z-50 bg-black border-2 border-accent text-accent hover:bg-black/90 shadow-lg rounded-lg transition-all duration-300 hover:scale-110 cursor-pointer animate-bob ${
-          showScrollTop ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed bottom-8 right-8 z-50 bg-black border-2 border-accent text-accent hover:bg-black/90 shadow-lg rounded-lg transition-all duration-300 hover:scale-110 cursor-pointer animate-bob ${showScrollTop ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         <ArrowUp className="w-5 h-5 text-accent" />
       </Button>
