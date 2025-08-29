@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import {createClient} from 'next-sanity'
+import { createClient } from 'next-sanity'
 import dotenv from 'dotenv'
 
 const envLocalPath = path.resolve('.env.local')
@@ -24,7 +24,7 @@ if (!token) {
   process.exit(1)
 }
 
-const client = createClient({projectId, dataset, apiVersion, useCdn: false, token})
+const client = createClient({ projectId, dataset, apiVersion, useCdn: false, token })
 
 async function upsertHeader() {
   const docId = 'header-singleton'
@@ -32,17 +32,17 @@ async function upsertHeader() {
     _id: docId,
     _type: 'header',
     menuItems: [
-      {label: 'Inicio', sectionId: 'hero'},
-      {label: 'Servicios', sectionId: 'services'},
-      {label: 'Nosotros', sectionId: 'about'},
-      {label: 'Alianzas', sectionId: 'alliances'},
-      {label: 'Testimonios', sectionId: 'testimonials'},
-      {label: 'Contacto', sectionId: 'contact'},
+      { label: 'Inicio', sectionId: 'hero' },
+      { label: 'Servicios', sectionId: 'services' },
+      { label: 'Nosotros', sectionId: 'about' },
+      { label: 'Alianzas', sectionId: 'alliances' },
+      { label: 'Testimonios', sectionId: 'testimonials' },
+      { label: 'Contacto', sectionId: 'contact' },
     ],
-    cta: {label: 'Consulta Gratuita', sectionId: 'contact'},
+    cta: { label: 'Consulta Gratuita', sectionId: 'contact' },
   }
 
-  await client.createIfNotExists({_id: docId, _type: 'header'})
+  await client.createIfNotExists({ _id: docId, _type: 'header' })
   await client.patch(docId).set(doc).commit()
   console.log('Header configurado/actualizado')
 }

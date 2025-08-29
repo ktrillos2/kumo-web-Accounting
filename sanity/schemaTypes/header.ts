@@ -1,4 +1,4 @@
-import {defineType, defineField} from 'sanity'
+import { defineType, defineField } from 'sanity'
 
 export default defineType({
   name: 'header',
@@ -15,11 +15,11 @@ export default defineType({
           title: 'Item',
           type: 'object',
           fields: [
-            {name: 'label', title: 'Etiqueta', type: 'string', validation: (Rule) => Rule.required()},
-            {name: 'sectionId', title: 'ID de sección (ancla)', type: 'string', validation: (Rule) => Rule.required()},
+            { name: 'label', title: 'Etiqueta', type: 'string', validation: (Rule) => Rule.required() },
+            { name: 'sectionId', title: 'ID de sección (ancla)', type: 'string', validation: (Rule) => Rule.required() },
           ],
           preview: {
-            select: {title: 'label', subtitle: 'sectionId'},
+            select: { title: 'label', subtitle: 'sectionId' },
           },
         }),
       ],
@@ -30,15 +30,15 @@ export default defineType({
       title: 'Botón CTA',
       type: 'object',
       fields: [
-        {name: 'label', title: 'Etiqueta', type: 'string', initialValue: 'Consulta Gratuita'},
-        {name: 'sectionId', title: 'ID de sección (ancla)', type: 'string', initialValue: 'contact'},
+        { name: 'label', title: 'Etiqueta', type: 'string', initialValue: 'Consulta Gratuita' },
+        { name: 'sectionId', title: 'ID de sección (ancla)', type: 'string', initialValue: 'contact' },
       ],
-      options: {collapsible: true, collapsed: false},
+      options: { collapsible: true, collapsed: false },
     }),
   ],
   preview: {
     prepare() {
-      return {title: 'Configuración de Header'}
+      return { title: 'Configuración de Header' }
     },
   },
 })

@@ -1,4 +1,4 @@
-import {defineType, defineField} from 'sanity'
+import { defineType, defineField } from 'sanity'
 
 export default defineType({
   name: 'generalSettings',
@@ -15,7 +15,7 @@ export default defineType({
       name: 'logo',
       title: 'Logo',
       type: 'image',
-      options: {hotspot: true},
+      options: { hotspot: true },
     }),
     defineField({
       name: 'description',
@@ -37,28 +37,51 @@ export default defineType({
       name: 'phones',
       title: 'Números de contacto',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
     }),
     defineField({
       name: 'emails',
       title: 'Correos electrónicos',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       validation: (Rule) => Rule.unique(),
     }),
     defineField({
-      name: 'social',
+      name: 'socials',
       title: 'Redes sociales',
-      type: 'object',
-      fields: [
-        {name: 'facebook', title: 'Facebook', type: 'url'},
-        {name: 'instagram', title: 'Instagram', type: 'url'},
-        {name: 'twitter', title: 'Twitter/X', type: 'url'},
-        {name: 'linkedin', title: 'LinkedIn', type: 'url'},
-        {name: 'youtube', title: 'YouTube', type: 'url'},
-        {name: 'tiktok', title: 'TikTok', type: 'url'},
-        {name: 'whatsapp', title: 'WhatsApp', type: 'url'},
-      ],
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({
+            name: 'platform',
+            title: 'Plataforma',
+            type: 'string',
+            options: {
+              list: [
+                { title: 'Facebook', value: 'facebook' },
+                { title: 'Instagram', value: 'instagram' },
+                { title: 'Twitter/X', value: 'twitter' },
+                { title: 'LinkedIn', value: 'linkedin' },
+                { title: 'YouTube', value: 'youtube' },
+                { title: 'TikTok', value: 'tiktok' },
+                { title: 'WhatsApp', value: 'whatsapp' },
+              ],
+              layout: 'dropdown',
+            },
+            validation: (Rule) => Rule.required(),
+          }),
+          defineField({ name: 'url', title: 'Enlace', type: 'url', validation: (Rule) => Rule.required() }),
+        ],
+        preview: {
+          select: { title: 'platform', subtitle: 'url' },
+          prepare({ title, subtitle }) {
+            const t = (title || '').toString()
+            const label = t.charAt(0).toUpperCase() + t.slice(1)
+            return { title: label, subtitle }
+          },
+        },
+      }],
     }),
   ],
   preview: {
