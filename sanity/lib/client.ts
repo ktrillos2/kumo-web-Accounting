@@ -1,10 +1,10 @@
 import { createClient } from 'next-sanity'
 
-import { apiVersion, dataset, projectId } from '../env'
+import { apiVersion, dataset, projectId, hasSanityCreds } from '../env'
 
-export const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
-})
+export const client = hasSanityCreds
+  ? createClient({ projectId, dataset, apiVersion, useCdn: true })
+  : {
+      fetch: async () => null,
+      withConfig: () => client,
+    } as unknown as ReturnType<typeof createClient>
