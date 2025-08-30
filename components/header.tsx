@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Phone, Mail } from "lucide-react"
 import { client } from "@/sanity/lib/client"
+import { toTelHref } from "@/lib/utils"
 import { urlFor } from "@/sanity/lib/image"
 
 type GeneralSettings = {
@@ -120,20 +121,28 @@ export default function Header() {
           </div>
         </div>
       )}
-      {/* Top contact bar (colapsa suavemente al hacer scroll) */}
+  {/* Top contact bar (colapsa suavemente al hacer scroll) */}
       <div
         className={`bg-primary text-primary-foreground px-4 overflow-hidden transition-[max-height,opacity] duration-300 ${isScrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100 py-2'}`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
+            <a
+              href={`tel:${toTelHref(general?.phones?.[0] ?? "+57 (1) 234-5678")}`}
+              className="flex items-center gap-2 hover:underline focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
+              aria-label={`Llamar al ${general?.phones?.[0] ?? "+57 (1) 234-5678"}`}
+            >
               <Phone className="w-4 h-4" />
               <span>{general?.phones?.[0] ?? "+57 (1) 234-5678"}</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </a>
+            <a
+              href={`mailto:${general?.emails?.[0] ?? "contacto@tnaccounting.com"}`}
+              className="flex items-center gap-2 hover:underline focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
+              aria-label={`Enviar correo a ${general?.emails?.[0] ?? "contacto@tnaccounting.com"}`}
+            >
               <Mail className="w-4 h-4" />
               <span>{general?.emails?.[0] ?? "contacto@tnaccounting.com"}</span>
-            </div>
+            </a>
           </div>
           <div className="hidden md:block">
             <span>{general?.schedule ? `Horario: ${general.schedule}` : 'Horario: Lun - Vie 8:00 AM - 6:00 PM'}</span>

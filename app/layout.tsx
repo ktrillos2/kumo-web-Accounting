@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "TN Accounting - Servicios Contables y Tributarios",
       description:
         "Empresa especializada en servicios contables, tributarios y revisoría fiscal con alianzas estratégicas.",
-      generator: 'v0.app',
+      
       icons: await (async () => {
         if (!logoUrl) return undefined
         // Intento best-effort: invertir colores con sharp si está disponible en la plataforma.
@@ -53,7 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "TN Accounting - Servicios Contables y Tributarios",
       description:
         "Empresa especializada en servicios contables, tributarios y revisoría fiscal con alianzas estratégicas.",
-      generator: 'v0.app',
+      
     }
   }
 }

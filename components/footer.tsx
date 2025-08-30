@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
+import { toTelHref } from "@/lib/utils"
 
 type Social = { platform: string; url: string }
 type General = {
@@ -179,8 +180,18 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-black flex-shrink-0 mt-1" />
-                <div className="min-w-0">
-                  <p className="text-primary-foreground/80 leading-relaxed">{general?.phones?.[0] ?? "+57 (1) 234-5678"}</p>
+                <div className="min-w-0 space-y-1">
+      {((general?.phones && general.phones.length > 0) ? general.phones : ["+57 (1) 234-5678"]).map((phone) => (
+                    <div key={phone}>
+                      <a
+        href={`tel:${toTelHref(phone)}`}
+                        className="text-black leading-relaxed hover:underline hover:text-black focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
+                        aria-label={`Llamar al ${phone}`}
+                      >
+                        {phone}
+                      </a>
+                    </div>
+                  ))}
                   <p className="text-sm text-primary-foreground/60 leading-relaxed">{general?.schedule ?? "Lun - Vie: 8:00 AM - 6:00 PM"}</p>
                 </div>
               </div>
@@ -190,7 +201,7 @@ export default function Footer() {
                 <div className="min-w-0">
                   <a
                     href={`mailto:${general?.emails?.[0] ?? 'contacto@tnaccounting.com'}`}
-                    className="text-primary-foreground/80 hover:text-accent transition-colors break-all leading-relaxed"
+                    className="text-black hover:text-black hover:underline transition-colors break-all leading-relaxed focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
                   >
                     {general?.emails?.[0] ?? 'contacto@tnaccounting.com'}
                   </a>

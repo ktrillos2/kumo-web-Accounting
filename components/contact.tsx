@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle, MessageSquare } from "lucide-react"
 import { client } from "@/sanity/lib/client"
+import { toTelHref } from "@/lib/utils"
 
 type GeneralSettings = {
   address?: string
@@ -310,7 +311,7 @@ export default function Contact() {
                 </div>
                 <h3 className="font-bold text-foreground mb-2">{content?.infoLabels?.phone ?? "Teléfono"}</h3>
                 <a
-                  href={`tel:${(general?.phones?.[0] || "+57 (1) 234-5678").replace(/\s/g, "")}`}
+                  href={`tel:${toTelHref(general?.phones?.[0] || "+57 (1) 234-5678")}`}
                   className="text-muted-foreground hover:text-accent transition-colors font-medium"
                 >
                   {general?.phones?.[0] ?? "+57 (1) 234-5678"}
@@ -372,7 +373,7 @@ export default function Contact() {
                     variant="secondary"
                     size="lg"
                     className="bg-background text-foreground hover:bg-background/90 px-8"
-                    onClick={() => window.open(`tel:${(general?.phones?.[0] || "+5712345678").replace(/\s/g, "")}`)}
+                    onClick={() => window.open(`tel:${toTelHref(general?.phones?.[0] || "+5712345678")}`)}
                   >
                     <Phone className="w-5 h-5 mr-2" />
                     {content?.cta?.callLabel ?? "Llamar Ahora"}
