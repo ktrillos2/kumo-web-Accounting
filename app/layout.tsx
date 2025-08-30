@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-import sharp from 'sharp'
 import { Playfair_Display, Inter } from "next/font/google"
 import "./globals.css"
 import { client } from "@/sanity/lib/client"
@@ -29,19 +28,23 @@ export async function generateMetadata(): Promise<Metadata> {
       generator: 'v0.app',
       icons: await (async () => {
         if (!logoUrl) return undefined
+        // Intento best-effort: invertir colores con sharp si está disponible en la plataforma.
         try {
+          const sharpMod = await import('sharp').catch(() => null as any)
+          if (!sharpMod) {
+            // Fallback: usa el logo original sin invertir
+            return { icon: [{ url: logoUrl }], shortcut: [{ url: logoUrl }], apple: [{ url: logoUrl }] }
+          }
+          const sharp = (sharpMod.default ?? sharpMod) as typeof import('sharp')
           const resp = await fetch(logoUrl)
-          if (!resp.ok) return undefined
+          if (!resp.ok) return { icon: [{ url: logoUrl }], shortcut: [{ url: logoUrl }], apple: [{ url: logoUrl }] }
           const buf = Buffer.from(await resp.arrayBuffer())
           const out = await sharp(buf).negate({ alpha: false }).png().toBuffer()
           const dataUrl = `data:image/png;base64,${out.toString('base64')}`
-          return {
-            icon: [{ url: dataUrl }],
-            shortcut: [{ url: dataUrl }],
-            apple: [{ url: dataUrl }],
-          }
+          return { icon: [{ url: dataUrl }], shortcut: [{ url: dataUrl }], apple: [{ url: dataUrl }] }
         } catch {
-          return undefined
+          // Fallback: usa el logo original
+          return { icon: [{ url: logoUrl }], shortcut: [{ url: logoUrl }], apple: [{ url: logoUrl }] }
         }
       })(),
     }
