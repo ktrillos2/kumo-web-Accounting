@@ -5,7 +5,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calculator, FileText, Shield, TrendingUp, Users, BookOpen, CheckCircle, ArrowRight } from "lucide-react"
 
-export default function Services() {
+const iconMap = {
+  calculator: Calculator,
+  "file-text": FileText,
+  shield: Shield,
+  "trending-up": TrendingUp,
+  users: Users,
+  "book-open": BookOpen,
+} as const
+
+type ServiceItem = {
+  icon: keyof typeof iconMap | any
+  title: string
+  description: string
+  features: Array<string | { text: string }>
+}
+
+type Props = {
+  items?: ServiceItem[]
+}
+
+export default function Services({ items }: Props = {}) {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -26,49 +46,50 @@ export default function Services() {
     return () => observer.disconnect()
   }, [])
 
-  const services = [
-    {
-      icon: Calculator,
-      title: "Contabilidad Integral",
-      description: "Llevamos la contabilidad completa de su empresa con precisión y cumplimiento normativo.",
-      features: ["Estados financieros", "Conciliaciones bancarias", "Control de inventarios", "Análisis financiero"],
-    },
-    {
-      icon: FileText,
-      title: "Asesoría Tributaria",
-      description: "Optimizamos su carga tributaria y aseguramos el cumplimiento de todas sus obligaciones fiscales.",
-      features: ["Declaraciones de renta", "Planeación tributaria", "Régimen simple", "Consultoría fiscal"],
-    },
-    {
-      icon: Shield,
-      title: "Revisoría Fiscal",
-      description: "Servicios de revisoría fiscal con nuestros aliados estratégicos certificados.",
-      features: ["Auditoría interna", "Control de riesgos", "Dictámenes fiscales", "Cumplimiento normativo"],
-    },
-    {
-      icon: TrendingUp,
-      title: "Consultoría Financiera",
-      description: "Asesoramos en la toma de decisiones estratégicas para el crecimiento de su negocio.",
-      features: [
-        "Análisis de rentabilidad",
-        "Proyecciones financieras",
-        "Evaluación de inversiones",
-        "Reestructuración financiera",
-      ],
-    },
-    {
-      icon: Users,
-      title: "Nómina y RRHH",
-      description: "Gestión integral de nómina y administración de recursos humanos.",
-      features: ["Liquidación de nómina", "Seguridad social", "Contratos laborales", "Prestaciones sociales"],
-    },
-    {
-      icon: BookOpen,
-      title: "Capacitación",
-      description: "Programas de capacitación en temas contables y tributarios para su equipo.",
-      features: ["Talleres especializados", "Actualización normativa", "Capacitación in-house", "Certificaciones"],
-    },
-  ]
+  const services: ServiceItem[] =
+    items ?? [
+      {
+        icon: 'calculator',
+        title: "Contabilidad Integral",
+        description: "Llevamos la contabilidad completa de su empresa con precisión y cumplimiento normativo.",
+        features: ["Estados financieros", "Conciliaciones bancarias", "Control de inventarios", "Análisis financiero"],
+      },
+      {
+        icon: 'file-text',
+        title: "Asesoría Tributaria",
+        description: "Optimizamos su carga tributaria y aseguramos el cumplimiento de todas sus obligaciones fiscales.",
+        features: ["Declaraciones de renta", "Planeación tributaria", "Régimen simple", "Consultoría fiscal"],
+      },
+      {
+        icon: 'shield',
+        title: "Revisoría Fiscal",
+        description: "Servicios de revisoría fiscal con nuestros aliados estratégicos certificados.",
+        features: ["Auditoría interna", "Control de riesgos", "Dictámenes fiscales", "Cumplimiento normativo"],
+      },
+      {
+        icon: 'trending-up',
+        title: "Consultoría Financiera",
+        description: "Asesoramos en la toma de decisiones estratégicas para el crecimiento de su negocio.",
+        features: [
+          "Análisis de rentabilidad",
+          "Proyecciones financieras",
+          "Evaluación de inversiones",
+          "Reestructuración financiera",
+        ],
+      },
+      {
+        icon: 'users',
+        title: "Nómina y RRHH",
+        description: "Gestión integral de nómina y administración de recursos humanos.",
+        features: ["Liquidación de nómina", "Seguridad social", "Contratos laborales", "Prestaciones sociales"],
+      },
+      {
+        icon: 'book-open',
+        title: "Capacitación",
+        description: "Programas de capacitación en temas contables y tributarios para su equipo.",
+        features: ["Talleres especializados", "Actualización normativa", "Capacitación in-house", "Certificaciones"],
+      },
+    ]
 
   const scrollToContact = () => {
     const element = document.getElementById("contact")
@@ -105,7 +126,10 @@ export default function Services() {
             >
               <CardHeader className="text-center pb-4">
                 <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="w-8 h-8 text-accent-foreground" />
+                  {(() => {
+                    const Icon = typeof service.icon === 'string' ? iconMap[service.icon as keyof typeof iconMap] : service.icon
+                    return <Icon className="w-8 h-8 text-accent-foreground" />
+                  })()}
                 </div>
                 <CardTitle className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">
                   {service.title}
@@ -114,12 +138,16 @@ export default function Services() {
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground text-center">{service.description}</p>
                 <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
+                  {service.features.map((feature, featureIndex) => {
+                    const text = typeof feature === 'string' ? feature : feature?.text
+                    if (!text) return null
+                    return (
+                      <li key={`${text}-${featureIndex}`} className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                        <span className="text-muted-foreground">{text}</span>
+                      </li>
+                    )
+                  })}
                 </ul>
               </CardContent>
             </Card>
