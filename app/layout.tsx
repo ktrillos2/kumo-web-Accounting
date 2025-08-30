@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import sharp from 'sharp'
 import { Playfair_Display, Inter } from "next/font/google"
 import "./globals.css"
 import { client } from "@/sanity/lib/client"
@@ -20,17 +21,29 @@ const inter = Inter({
 export async function generateMetadata(): Promise<Metadata> {
   try {
     const general = await client.fetch(`*[_type=="generalSettings" && _id=="general-settings-singleton"][0]{logo}`)
-    const hasLogo = Boolean(general?.logo)
+    const logoUrl = general?.logo ? urlFor(general.logo).width(64).height(64).format('png').url() : null
     return {
       title: "TN Accounting - Servicios Contables y Tributarios",
       description:
         "Empresa especializada en servicios contables, tributarios y revisoría fiscal con alianzas estratégicas.",
       generator: 'v0.app',
-      icons: {
-        icon: [{ url: '/api/favicon' }],
-        shortcut: [{ url: '/api/favicon' }],
-        apple: [{ url: '/api/favicon' }],
-      },
+      icons: await (async () => {
+        if (!logoUrl) return undefined
+        try {
+          const resp = await fetch(logoUrl)
+          if (!resp.ok) return undefined
+          const buf = Buffer.from(await resp.arrayBuffer())
+          const out = await sharp(buf).negate({ alpha: false }).png().toBuffer()
+          const dataUrl = `data:image/png;base64,${out.toString('base64')}`
+          return {
+            icon: [{ url: dataUrl }],
+            shortcut: [{ url: dataUrl }],
+            apple: [{ url: dataUrl }],
+          }
+        } catch {
+          return undefined
+        }
+      })(),
     }
   } catch {
     return {
