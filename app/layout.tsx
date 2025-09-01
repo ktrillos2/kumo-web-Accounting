@@ -42,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "Colombia",
       ],
       alternates: {
-        canonical: siteUrl,
+        canonical: '/',
       },
       robots: {
         index: true,
@@ -70,27 +70,12 @@ export async function generateMetadata(): Promise<Metadata> {
         description,
         images: logoUrl ? [logoUrl] : undefined,
       },
-      icons: await (async () => {
-        if (!logoUrl) return undefined
-        // Intento best-effort: invertir colores con sharp si está disponible en la plataforma.
-        try {
-          const sharpMod = await import('sharp').catch(() => null as any)
-          if (!sharpMod) {
-            // Fallback: usa el logo original sin invertir
-            return { icon: [{ url: logoUrl }], shortcut: [{ url: logoUrl }], apple: [{ url: logoUrl }] }
-          }
-          const sharp = (sharpMod.default ?? sharpMod) as typeof import('sharp')
-          const resp = await fetch(logoUrl)
-          if (!resp.ok) return { icon: [{ url: logoUrl }], shortcut: [{ url: logoUrl }], apple: [{ url: logoUrl }] }
-          const buf = Buffer.from(await resp.arrayBuffer())
-          const out = await sharp(buf).negate({ alpha: false }).png().toBuffer()
-          const dataUrl = `data:image/png;base64,${out.toString('base64')}`
-          return { icon: [{ url: dataUrl }], shortcut: [{ url: dataUrl }], apple: [{ url: dataUrl }] }
-        } catch {
-          // Fallback: usa el logo original
-          return { icon: [{ url: logoUrl }], shortcut: [{ url: logoUrl }], apple: [{ url: logoUrl }] }
-        }
-      })(),
+      icons: {
+        // Usa un activo estático existente para que Google lo detecte de forma consistente
+        icon: [{ url: '/logo.png' }],
+        apple: [{ url: '/logo.png' }],
+        shortcut: [{ url: '/logo.png' }],
+      },
     }
   } catch {
     return {
